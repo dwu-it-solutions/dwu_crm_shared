@@ -1,0 +1,22 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "healthStatus": "ok",
+    "healthMessage": "Service available"
+  },
+  "navbar": {
+    "leads": "Leads",
+    "contacts": "Contacts",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Sales Dashboard",
+    "conversionRate": "Conversion Rate",
+    "totalLeads": "Total Leads"
+  }
+}
+
+
+
+

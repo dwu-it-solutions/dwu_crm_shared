@@ -1,0 +1,52 @@
+{
+  "name": "@dwu/shared",
+  "version": "0.1.0",
+  "description": "Biblioteca compartilhada do ecossistema DWU CRM (i18n, enums, tipos, utilitários).",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./i18n": "./dist/i18n/index.js"
+  },
+  "typesVersions": {
+    "*": {
+      "i18n": [
+        "dist/i18n/index.d.ts"
+      ],
+      "*": [
+        "dist/*",
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwu-it-solutions/dwu_crm_backend.git"
+  },
+  "keywords": [
+    "dwu",
+    "crm",
+    "shared"
+  ],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/dwu-it-solutions/dwu_crm_backend/issues"
+  },
+  "homepage": "https://github.com/dwu-it-solutions/dwu_crm_backend#readme",
+  "devDependencies": {
+    "@types/node": "^20.19.24",
+    "rimraf": "^6.1.0",
+    "typescript": "^5.9.3"
+  }
+}
