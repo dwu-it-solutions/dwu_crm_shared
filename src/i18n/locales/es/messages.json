@@ -14,6 +14,9 @@
     "title": "Panel de Ventas",
     "conversionRate": "Tasa de Conversión",
     "totalLeads": "Total de Leads"
+  },
+  "errors": {
+    "leadNotFound": "Lead {{id}} no encontrado"
   }
 }
 
