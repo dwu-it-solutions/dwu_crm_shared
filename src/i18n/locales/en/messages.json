@@ -16,7 +16,7 @@
     "totalLeads": "Total Leads"
   },
   "errors": {
-    "leadNotFound": "Lead {{id}} not found"
+    "leadNotFound": "Lead {id} not found"
   }
 }
 
