@@ -16,7 +16,8 @@
     "totalLeads": "Total de Leads"
   },
   "errors": {
-    "leadNotFound": "Lead {id} no encontrado"
+    "leadNotFound": "Lead {id} no encontrado",
+    "invalidCredentials": "Credenciales inválidas"
   }
 }
 
