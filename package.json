@@ -32,7 +32,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dwu-it-solutions/dwu_crm_backend.git"
+    "url": "git+https://github.com/dwu-it-solutions/dwu_crm_shared.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "@dwu:registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "dwu",
@@ -41,9 +45,9 @@
   ],
   "author": "",
   "bugs": {
-    "url": "https://github.com/dwu-it-solutions/dwu_crm_backend/issues"
+    "url": "https://github.com/dwu-it-solutions/dwu_crm_shared/issues"
   },
-  "homepage": "https://github.com/dwu-it-solutions/dwu_crm_backend#readme",
+  "homepage": "https://github.com/dwu-it-solutions/dwu_crm_shared#readme",
   "devDependencies": {
     "@types/node": "^20.19.24",
     "rimraf": "^6.1.0",
