@@ -1,5 +1,5 @@
 {
-  "name": "@dwu/shared",
+  "name": "@dwu-it-solutions/crm-shared",
   "version": "0.1.0",
   "description": "Biblioteca compartilhada do ecossistema DWU CRM (i18n, enums, tipos, utilitários).",
   "license": "UNLICENSED",
@@ -36,7 +36,7 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
-    "@dwu:registry": "https://npm.pkg.github.com"
+    "@dwu-it-solutions:registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "dwu",
