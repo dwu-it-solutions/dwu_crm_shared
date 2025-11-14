@@ -56,6 +56,23 @@ jobs:
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "Published version: $NEW_VERSION"
 
+      - name: Check if version exists and increment if needed
+        id: check_version
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          # Tenta verificar se a versão já existe
+          if npm view "@dwu-it-solutions/crm-shared@$VERSION" version > /dev/null 2>&1; then
+            echo "Version $VERSION already exists, incrementing..."
+            NEW_VERSION=$(npm version patch --no-git-tag-version | sed 's/v//')
+            echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+            echo "New version: $NEW_VERSION"
+          else
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+            echo "Version $VERSION is new"
+          fi
+
       - name: Publish to GitHub Packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,5 +84,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
-          git push origin "v${{ steps.version.outputs.version }}" || true
+          git tag -a "v${{ steps.check_version.outputs.version }}" -m "Release v${{ steps.check_version.outputs.version }}"
+          git push origin "v${{ steps.check_version.outputs.version }}" || true
