@@ -1,0 +1,26 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancelar",
+    "healthStatus": "ok",
+    "healthMessage": "Serviço disponível"
+  },
+  "navbar": {
+    "leads": "Leads",
+    "contacts": "Contatos",
+    "settings": "Configurações"
+  },
+  "dashboard": {
+    "title": "Painel de Vendas",
+    "conversionRate": "Taxa de Conversão",
+    "totalLeads": "Total de Leads"
+  },
+  "errors": {
+    "leadNotFound": "Lead {id} não encontrado",
+    "invalidCredentials": "Credenciais inválidas"
+  }
+}
+
+
+
+

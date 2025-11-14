@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - development
+      - staging
+      - main
+  pull_request:
+    branches:
+      - development
+      - staging
+      - main
+
+env:
+  APP_NAME: dwu-crm-shared
+  APP_ENV: ${{ vars.APP_ENV }}
+  GIT_BRANCH: ${{ github.ref_name }}
+  GIT_COMMIT: ${{ github.sha }}
+  DEPLOY_TAG: v${{ github.run_number }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint --if-present
+      - name: Build package
+        run: npm run build --if-present
+      - name: Run tests
+        run: npm test --if-present
+
+
+
+

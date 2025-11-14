@@ -1,0 +1,71 @@
+name: Publish to GitHub Packages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (patch, minor, major)'
+        required: false
+        default: 'patch'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@dwu'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build package
+        run: npm run build
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            VERSION_TYPE="${{ github.event.inputs.version }}"
+            NEW_VERSION=$(npm version $VERSION_TYPE --no-git-tag-version | sed 's/v//')
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            NEW_VERSION=$(echo "${{ github.ref }}" | sed 's/refs\/tags\/v//')
+            npm version $NEW_VERSION --no-git-tag-version
+          else
+            # Incrementa patch version automaticamente
+            NEW_VERSION=$(npm version patch --no-git-tag-version | sed 's/v//')
+          fi
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "Published version: $NEW_VERSION"
+
+      - name: Publish to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm publish
+
+      - name: Create Git tag (if not from tag)
+        if: github.event_name != 'push' || startsWith(github.ref, 'refs/heads/')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
+          git push origin "v${{ steps.version.outputs.version }}" || true

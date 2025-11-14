@@ -8,3 +8,7 @@ dist/
 coverage/
 .nyc_output/
 
+# npmrc com tokens (usar .npmrc.example como template)
+.npmrc
+!.npmrc.example
+
